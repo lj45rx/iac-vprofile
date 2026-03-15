@@ -1,5 +1,5 @@
 
-name: Terraform Destroy
+name: Terraform Destroy (TODO delete)
 
 on:
   workflow_dispatch:
