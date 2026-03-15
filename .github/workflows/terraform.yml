@@ -17,7 +17,7 @@ on:
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} # name poorly chosen - should be AWS_SECRET_ACCESS_KEY (without _ID)
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE }}
   AWS_REGION: eu-north-1
   EKS_CLUSTER: gitops-proj-tut-eks # same as in variables.tf
@@ -57,13 +57,13 @@ jobs:
         run: terraform plan -no-color -input=false -out tf-planfile
         continue-on-error: true # do custom check in next step
         
-      - name: "Terraform check plan status"
+      - name: "Terraform check plan status - exit on error"
         id: tf-plan-status
         if: steps.tf-plan.outcome == 'failure'
         run: echo "Terraform plan failed! Check the logs for details"; exit 1
 
 
-      - name: "Terraform apply"
+      - name: "Terraform apply - on main branch"
         id: apply
         # only run for push action on main branch
         if: github.ref == 'refs/heads/main' && github.event == 'push'
@@ -74,7 +74,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: "Get Kube config file"
