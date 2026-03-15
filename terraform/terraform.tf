@@ -27,9 +27,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "gitopsterrastate"
+    bucket = "gitops-tut-proj"
     key    = "terraform.tfstate"
-    region = "us-east-2"
+    region = "eu-north-1"
   }
 
   required_version = "~> 1.6.3"
@@ -37,3 +37,9 @@ terraform {
 ##
 ##
 ##
+## trigger rerun 
+## trigger rerun 
+## trigger rerun 
+## trigger rerun 
+## trigger rerun 
+## trigger rerun 
