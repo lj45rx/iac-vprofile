@@ -13,6 +13,8 @@ on:
     paths: 
       - terraform/**
 
+  workflow_dispatch: # allow manual dispatch (for testing only)
+
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
