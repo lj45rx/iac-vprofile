@@ -41,7 +41,7 @@ jobs:
 
       - name: "Terraform init"
         id: tf-init
-        run: terraform init -backend-config="bucket=${{ env.BUCKET_TF_STATE }}" -backend-config="region=${{ env.AWS_REGION }}"
+        run: echo ${{ env.BUCKET_TF_STATE }}; terraform init -backend-config="bucket=${{ env.BUCKET_TF_STATE }}" -backend-config="region=${{ env.AWS_REGION }}"
 
       - name: "Terraform format" # will cause failure on incorrect format
         id: tf-format
