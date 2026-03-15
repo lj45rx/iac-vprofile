@@ -23,15 +23,15 @@ jobs:
         shell: bash
         working-directory: terraform
     steps:
+      - name: Checkout code # must be first step? else working directory does not exist
+        uses: actions/checkout@v4
+
       - name: Validate confirmation
         run: |
           if [ "${{ github.event.inputs.confirm_destroy }}" != "destroy" ]; then
             echo "Error: You must type 'destroy' to confirm resource deletion"
             exit 1
           fi
-    
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: "Setup Terraform on the runner"
         uses: hashicorp/setup-terraform@v2
