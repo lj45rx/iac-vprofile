@@ -3,9 +3,8 @@ module "eks" {
   version = "19.19.1"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.27"
-
-  vpc_id                         = module.vpc.vpc_id
+  # cluster_version = "1.27" # this failed with "InvalidParameterException: unsupported Kubernetes version 1.27"
+  cluster_version = "1.28"
   subnet_ids                     = module.vpc.private_subnets
   cluster_endpoint_public_access = true
 
