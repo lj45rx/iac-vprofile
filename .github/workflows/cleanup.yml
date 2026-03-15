@@ -21,7 +21,7 @@ jobs:
     defaults: # in all steps do
       run:
         shell: bash
-        working-directory: ./terraform
+        working-directory: terraform
     steps:
       - name: Validate confirmation
         run: |

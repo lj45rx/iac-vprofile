@@ -1,6 +1,4 @@
-
 name: Terraform Destroy (TODO delete)
-
 on:
   workflow_dispatch:
     inputs:
