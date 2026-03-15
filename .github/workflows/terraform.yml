@@ -64,9 +64,10 @@ jobs:
 
 
       - name: "Terraform apply - on main branch"
-        id: apply
+        id: apply 
         # only run for push action on main branch
-        if: github.ref == 'refs/heads/main' && github.event == 'push'
+        # Be careful not to use github.event; use github.event_name
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         # execute based on file created in 'terraform plan', disable parallelism to prevent some problems
         run: terraform apply -auto-approve -input=false -parallelism=1 tf-planfile
 
