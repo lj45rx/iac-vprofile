@@ -1,6 +1,6 @@
 name: "Vprofile IAC Destroy all"
 on: 
-  workflow_dispatch: # allow manual dispatch 
+  workflow_dispatch: # allow manual dispatch only
     inputs:
       confirm_destroy:
         description: 'Type "destroy" to confirm deletion of all resources'
@@ -47,7 +47,6 @@ jobs:
 
       - name: "Terraform init"
         id: tf-init
-        # run: terraform init -backend-config="bucket=$BUCKET_TF_STATE" 
         run: terraform init -backend-config="bucket=${{ env.BUCKET_TF_STATE }}" -backend-config="region=${{ env.AWS_REGION }}"
 
       - name: "Terraform format" # will cause failure on incorrect format
@@ -79,5 +78,6 @@ jobs:
 
       - name: Terraform Destroy
         # if: steps.destroy-ingress-controller.outcome == 'success'
-        run: terraform apply -auto-approve -input=false -parallelism=1 destroy.tfplan
+        # run: terraform apply -auto-approve -input=false -parallelism=1 destroy.tfplan # no parallelism
+        run: terraform apply -auto-approve -input=false destroy.tfplan
 
